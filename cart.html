@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart | MULLIRI Coffee & Biscuits</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="cart.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <nav class="nav-left">
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="menu.html">Menu</a>
+  </nav>
+  <a class="logo" href="index.html">MULLIRI<small>COFFEE & BISCUITS</small></a>
+  <a class="cart" href="cart.html">Cart ♧</a>
+</header>
+
+<main style="padding: 60px 8%; max-width: 800px; margin: 0 auto;">
+  <h2>Your Shopping <em>Cart</em></h2>
+  
+  <div id="cart-items-container" style="margin-top: 30px;">
+    <!-- Dito i-display sa JavaScript ang mga items -->
+  </div>
+  
+  <div id="cart-total" style="margin-top: 30px; font-size: 20px; font-weight: bold;"></div>
+
+  <!-- PAYMENT OPTIONS SECTION -->
+  <div style="margin-top: 30px; background: #211b16; padding: 20px; border-radius: 5px;">
+    <h3 style="margin-bottom: 15px; font-size: 16px;">Select Payment Method</h3>
+    <label style="display: block; margin-bottom: 10px; cursor: pointer;">
+      <input type="radio" name="payment" value="GCash" checked style="margin-right: 8px;"> 
+      <strong>GCash</strong> (Mobile Wallet)
+    </label>
+    <label style="display: block; cursor: pointer;">
+      <input type="radio" name="payment" value="COD" style="margin-right: 8px;"> 
+      <strong>Cash on Delivery (COD)</strong>
+    </label>
+  </div>
+
+  <div style="margin-top: 30px; display: flex; gap: 15px;">
+    <a href="shop.html" class="button" style="background: transparent; border: 1px solid var(--cream);">← Continue Shopping</a>
+    <button id="checkout-btn" class="button" style="cursor: pointer;">Proceed to Checkout</button>
+  </div>
+</main>
+
+<footer class="simple-footer" style="margin-top: 80px;">
+  <a class="logo" href="index.html">MULLIRI<small>COFFEE & BISCUITS</small></a>
+  <p>Friends, coffee, and comfort.</p>
+  <a href="contact.html">Contact us ↗</a>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let cart = JSON.parse(localStorage.getItem('mulliri_cart')) || [];
+    const container = document.getElementById('cart-items-container');
+    const totalContainer = document.getElementById('cart-total');
+    
+    if (cart.length === 0) {
+      container.innerHTML = "<p>Your cart is currently empty.</p>";
+      totalContainer.innerHTML = "";
+      return;
+    }
+
+    let html = '<ul style="list-style: none; padding: 0;">';
+    let total = 0;
+
+    cart.forEach((item) => {
+      let subtotal = item.price * item.quantity;
+      total += subtotal;
+      html += `
+        <li style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(233,229,217,0.2);">
+          <span>${item.name} (x${item.quantity})</span>
+          <span>£${subtotal.toFixed(2)}</span>
+        </li>
+      `;
+    });
+
+    html += '</ul>';
+    container.innerHTML = html;
+    totalContainer.innerHTML = `Total: £${total.toFixed(2)}`;
+
+    // Checkout button action
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', () => {
+        const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+        alert(`Order placed successfully!\nPayment Method: ${selectedPayment}\nTotal: £${total.toFixed(2)}`);
+        
+        // I-clear ang cart human mag-order
+        localStorage.removeItem('mulliri_cart');
+        window.location.href = 'index.html';
+      });
+    }
+  });
+</script>
+</body>
+</html>

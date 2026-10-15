@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- Link sa JavaScript para sa Cart -->
+  <script src="cart.js" defer></script>
 </head>
 <body>
 
@@ -18,7 +19,8 @@
     <a href="menu.html">Menu</a>
   </nav>
   <a class="logo" href="index.html">MULLIRI<small>COFFEE & BISCUITS</small></a>
-  <a class="cart" href="shop.html">Cart ♧</a>
+  <!-- Naa na kining Cart counter -->
+  <a class="cart" href="cart.html">Cart (<span id="cart-count">0</span>) ♧</a>
 </header>
 
 <main>
@@ -38,34 +40,40 @@
     </div>
 
     <div class="products">
-      <article class="product">
-        <img src="./images/sidamo-reserve.png">
+      <!-- PRODUCT 1 -->
+      <article class="product" data-name="Sidamo Reserve" data-price="22.00">
+        <img src="./images/sidamo-reserve.png" alt="Sidamo Reserve">
         <h3>Sidamo Reserve</h3>
         <p>Ethiopian single origin · Bright and floral</p>
         <div class="product-price">
           <span>Whole beans</span>
           <span>£22.00</span>
         </div>
+        <button class="button add-to-cart-btn" style="margin-top: 15px; width: 100%; cursor: pointer;">Add to Cart</button>
       </article>
 
-      <article class="product">
-        <img src="./images/mayfair-blend.png">
+      <!-- PRODUCT 2 -->
+      <article class="product" data-name="Mayfair House Blend" data-price="14.00">
+        <img src="./images/mayfair-blend.png" alt="Mayfair House Blend">
         <h3>Mayfair House Blend</h3>
         <p>Rich, smooth, and beautifully balanced</p>
         <div class="product-price">
           <span>Whole beans</span>
           <span>£14.00</span>
         </div>
+        <button class="button add-to-cart-btn" style="margin-top: 15px; width: 100%; cursor: pointer;">Add to Cart</button>
       </article>
 
-      <article class="product">
-        <img src="./images/midnight-roast.png">
+      <!-- PRODUCT 3 -->
+      <article class="product" data-name="Midnight Roast" data-price="18.00">
+        <img src="./images/midnight-roast.png" alt="Midnight Roast">
         <h3>Midnight Roast</h3>
         <p>Deep, bold, and velvety</p>
         <div class="product-price">
           <span>Whole beans</span>
           <span>£18.00</span>
         </div>
+        <button class="button add-to-cart-btn" style="margin-top: 15px; width: 100%; cursor: pointer;">Add to Cart</button>
       </article>
     </div>
   </section>
